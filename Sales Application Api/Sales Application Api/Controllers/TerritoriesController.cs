@@ -31,27 +31,9 @@ namespace Sales_Application_Api.Controllers
             return await _context.Territories.ToListAsync();
         }
 
-        // GET: api/Territories/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Territory>> GetTerritory(string id)
-        {
-          if (_context.Territories == null)
-          {
-              return NotFound();
-          }
-            var territory = await _context.Territories.FindAsync(id);
-
-            if (territory == null)
-            {
-                return NotFound();
-            }
-
-            return territory;
-        }
-
         // PUT: api/Territories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("edit/{id}")]
         public async Task<IActionResult> PutTerritory(string id, Territory territory)
         {
             if (id != territory.TerritoryId)
@@ -107,26 +89,6 @@ namespace Sales_Application_Api.Controllers
             }
 
             return CreatedAtAction("GetTerritory", new { id = territory.TerritoryId }, territory);
-        }
-
-        // DELETE: api/Territories/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTerritory(string id)
-        {
-            if (_context.Territories == null)
-            {
-                return NotFound();
-            }
-            var territory = await _context.Territories.FindAsync(id);
-            if (territory == null)
-            {
-                return NotFound();
-            }
-
-            _context.Territories.Remove(territory);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool TerritoryExists(string id)

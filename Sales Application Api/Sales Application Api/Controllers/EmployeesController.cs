@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sales_Application_Api.Models;
@@ -32,29 +33,30 @@ namespace Sales_Application_Api.Controllers
         }
 
         // GET: api/Employees/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int id)
-        {
-          //if (_context.Employees == null)
-          //{
-          //    return NotFound();
-          //}
-            var employee = await _context.Employees.FindAsync(id);
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Employee>> GetEmployee(int id)
+        //{
+        //  //if (_context.Employees == null)
+        //  //{
+        //  //    return NotFound();
+        //  //}
+        //    var employee = await _context.Employees.FindAsync(id);
 
-            if (employee == null)
-            {
-                return NotFound();
-            }
+        //    if (employee == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return employee;
-        }
+        //    return employee;
+        //}
 
+        
         // GET: api/Employees/title
-        [HttpGet("{title}")]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByTitle(string title)
+        [HttpGet("title/{title}")]
+        public async Task<ActionResult<Employee>> GetEmployeeByTitle(string title)
         {
             
-            var employee = await _context.Employees.Where(c => c.Title == title).ToListAsync();
+            var employee = await _context.Employees.Where(c => c.Title == title).FirstOrDefaultAsync();
 
             if (employee == null)
             {
@@ -65,11 +67,11 @@ namespace Sales_Application_Api.Controllers
         }
 
         // GET: api/Employees/city
-        [HttpGet("{City}")]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByCity(string city)
+        [HttpGet("City/{City}")]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByCity(string City)
         {
 
-            var employee = await _context.Employees.Where(c => c.City == city).ToListAsync();
+            var employee = await _context.Employees.Where(c => c.City == City).ToListAsync();
 
             if (employee == null)
             {
@@ -80,11 +82,11 @@ namespace Sales_Application_Api.Controllers
         }
 
         // GET: api/Employees/Region
-        [HttpGet("{Region}")]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByRegion(string region)
+        [HttpGet("Region/{RegionDescription}")]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByRegion(string RegionDescription)
         {
 
-            var employee = await _context.Employees.Where(c => c.Region == region).ToListAsync();
+            var employee = await _context.Employees.Where(c => c.Region == RegionDescription).ToListAsync();
 
             if (employee == null)
             {
@@ -94,9 +96,24 @@ namespace Sales_Application_Api.Controllers
             return employee;
         }
 
-        //GET: api/Employees/title
+        //GET: api/Employees/HireDate
        [HttpGet("HireDate/{HireDate}")]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByDate(DateTime HireDate)
+        {
+
+            var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+
+            if (employees == null)
+            {
+                return NotFound();
+            }
+
+            return employees;
+        }
+
+        //GET: api/Employees/highestsalebyemployee/{date}
+        [HttpGet("highestsalebyemployee/{date}")]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
         {
 
             var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
@@ -112,7 +129,7 @@ namespace Sales_Application_Api.Controllers
 
         // PUT: api/Employees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("edit{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
             if (id != employee.EmployeeId)
@@ -172,6 +189,27 @@ namespace Sales_Application_Api.Controllers
 
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // PATCH: api/employees/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPatch("edit/{EmployeeID}")]
+        public async Task<IActionResult> PatchShipper(int EmployeeID, JsonPatchDocument<Employee> employeePatch)
+        {
+            var employee = await this._context.Employees.FindAsync(EmployeeID);
+
+            if (employee != null)
+            {
+                employeePatch.ApplyTo(employee);
+                _context.SaveChanges();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
             return NoContent();
         }
