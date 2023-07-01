@@ -32,7 +32,7 @@ namespace Sales_Application_Api.Controllers
         }
 
         // GET: api/Orders/5
-        [HttpGet("{id}")]
+        [HttpGet("shipdetails/{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
           if (_context.Orders == null)
@@ -47,6 +47,56 @@ namespace Sales_Application_Api.Controllers
             }
 
             return order;
+        }
+
+        ////Get: api/Orders/orderbyemployee/{Firstname}
+        //[HttpGet("{FirstName}")]
+
+        //public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string FirstName)
+        //{
+        //    var firstname = await _context.Orders.Where(o => o.FirstName == FirstName).FirstOrDefaultAsync();
+
+        //    if (firstname == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return firstname;
+        //}
+
+        // GET: api/orderDetails
+        [HttpGet("ordersDetails")]
+        public async Task<ActionResult<IEnumerable<OrderDetail>>> GetOrderDetails()
+        { 
+
+            var orders = await _context.OrderDetails.ToListAsync();
+
+
+
+            if (orders == null)
+            {
+                return NotFound();
+            }
+
+            return orders;
+        }
+
+        // GET: api/orderDetails/{EmployeeID}
+        [HttpGet("ordersDetails/{EmployeeID}")]
+        public async Task<ActionResult<IEnumerable<OrderDetail>>> GetOrderDetailsByEmployeeId(int EmployeeID)
+        {
+           List<OrderDetail> output = new List<OrderDetail>();
+
+            var orders = await _context.Orders.Where(o => o.EmployeeId == EmployeeID).ToListAsync();
+
+            foreach(var order in orders)
+            {
+                var orderdetails = await _context.OrderDetails.Where(od => od.OrderId == order.OrderId).FirstOrDefaultAsync();
+                output.Add(orderdetails);
+            }
+           
+
+            return output;
         }
 
         // PUT: api/Orders/5

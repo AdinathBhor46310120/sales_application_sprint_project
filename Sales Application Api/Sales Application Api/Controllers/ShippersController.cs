@@ -110,6 +110,7 @@ namespace Sales_Application_Api.Controllers
             if(shipper != null)
             {
                 shipperPatch.ApplyTo(shipper);
+                _context.SaveChanges();
             }
 
             if(!ModelState.IsValid)
