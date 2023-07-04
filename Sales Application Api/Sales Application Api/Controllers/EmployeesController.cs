@@ -21,7 +21,7 @@ namespace Sales_Application_Api.Controllers
             _context = context;
         }
 
-        // POST: api/employees
+        // POST: api/employee
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
@@ -35,7 +35,7 @@ namespace Sales_Application_Api.Controllers
             return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
         }
 
-        // GET: api/employees
+        // GET: api/employee
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
@@ -46,27 +46,7 @@ namespace Sales_Application_Api.Controllers
             return await _context.Employees.ToListAsync();
         }
 
-        // PATCH: api/employees/5
-        [HttpPatch("edit/{EmployeeID}")]
-        public async Task<IActionResult> PatchShipper(int EmployeeID, JsonPatchDocument<Employee> employeePatch)
-        {
-            var employee = await this._context.Employees.FindAsync(EmployeeID);
-
-            if (employee != null)
-            {
-                employeePatch.ApplyTo(employee);
-                _context.SaveChanges();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            return NoContent();
-        }
-
-        // PUT: api/employees/5
+        // PUT: api/employee/edit/5
         [HttpPut("edit{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
@@ -96,7 +76,27 @@ namespace Sales_Application_Api.Controllers
             return NoContent();
         }
 
-        // GET: api/Employees/title
+        // PATCH: api/employee/edit/5
+        [HttpPatch("edit/{EmployeeID}")]
+        public async Task<IActionResult> PatchShipper(int EmployeeID, JsonPatchDocument<Employee> employeePatch)
+        {
+            var employee = await this._context.Employees.FindAsync(EmployeeID);
+
+            if (employee != null)
+            {
+                employeePatch.ApplyTo(employee);
+                _context.SaveChanges();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return NoContent();
+        }
+
+        // GET: api/employees/title/{title}
         [HttpGet("title/{title}")]
         public async Task<ActionResult<Employee>> GetEmployeeByTitle(string title)
         {
@@ -111,7 +111,7 @@ namespace Sales_Application_Api.Controllers
             return employee;
         }
 
-        // GET: api/Employees/city
+        // GET: api/employee/City/{City}
         [HttpGet("City/{City}")]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByCity(string City)
         {
@@ -126,7 +126,7 @@ namespace Sales_Application_Api.Controllers
             return employee;
         }
 
-        // GET: api/Employees/Region
+        // GET: api/Employees/Region/{RegionDescription}
         [HttpGet("Region/{RegionDescription}")]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByRegion(string RegionDescription)
         {
@@ -156,6 +156,7 @@ namespace Sales_Application_Api.Controllers
             return employees;
         }
 
+        /*
         //GET: api/Employees/highestsalebyemployee/{date}
         [HttpGet("highestsalebyemployee/{date}")]
         public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
@@ -169,32 +170,104 @@ namespace Sales_Application_Api.Controllers
             }
 
             return employees;
-        }
+        }*/
 
+        /*
+       //GET: api/Employees/highestsalebyemployee/{year}
+       [HttpGet("highestsalebyemployee/{date}")]
+       public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
+       {
 
-        
+           var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
 
-        // DELETE: api/Employees/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployee(int id)
+           if (employees == null)
+           {
+               return NotFound();
+           }
+
+           return employees;
+       }*/
+
+        /*
+      //GET: /api/employee/lowestsalebyemployee/{date}
+      [HttpGet("highestsalebyemployee/{date}")]
+      public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
+      {
+
+          var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+
+          if (employees == null)
+          {
+              return NotFound();
+          }
+
+          return employees;
+      }*/
+
+        /*
+     //GET: /api/employee/lowestsalebyemployee/{year}
+     [HttpGet("highestsalebyemployee/{date}")]
+     public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
+     {
+
+         var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+
+         if (employees == null)
+         {
+             return NotFound();
+         }
+
+         return employees;
+     }*/
+
+        /*
+     //GET: /api/employee/salemadebyanemployee/{Employeeid}/{date}
+     [HttpGet("highestsalebyemployee/{date}")]
+     public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
+     {
+
+         var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+
+         if (employees == null)
+         {
+             return NotFound();
+         }
+
+         return employees;
+     }*/
+
+        /*
+    //GET: /api/employee/Salemadebyanemployeebetweendates/{EmployeeId}{fromdate}/{todate}
+    [HttpGet("highestsalebyemployee/{date}")]
+    public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
+    {
+
+        var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+
+        if (employees == null)
         {
-            if (_context.Employees == null)
-            {
-                return NotFound();
-            }
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            _context.Employees.Remove(employee);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return NotFound();
         }
 
-        
+        return employees;
+    }*/
+
+        /*
+    //GET: /api/employee/companyname/{EmployeeID}
+    [HttpGet("highestsalebyemployee/{date}")]
+    public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
+    {
+
+        var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+
+        if (employees == null)
+        {
+            return NotFound();
+        }
+
+        return employees;
+    }*/
+
 
         private bool EmployeeExists(int id)
         {
