@@ -11563,7 +11563,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SUTTARKA\\.nuget\\packages\\": {}
+    "C:\\Users\\adbhor\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -11571,11 +11571,11 @@
       "projectUniqueName": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\Sales Application Api.csproj",
       "projectName": "Sales Application Api",
       "projectPath": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\Sales Application Api.csproj",
-      "packagesPath": "C:\\Users\\SUTTARKA\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\adbhor\\.nuget\\packages\\",
       "outputPath": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\SUTTARKA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\adbhor\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
