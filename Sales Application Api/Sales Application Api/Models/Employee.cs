@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Sales_Application_Api.Models;
@@ -42,15 +41,17 @@ public partial class Employee
 
     public string? PhotoPath { get; set; }
 
-    [JsonIgnore]
+    public string? Email { get; set; }
+
+    public string? Password { get; set; }
+
+    public string? Role { get; set; }
+
     public virtual ICollection<Employee> InverseReportsToNavigation { get; set; } = new List<Employee>();
 
-    [JsonIgnore]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    [JsonIgnore]
     public virtual Employee? ReportsToNavigation { get; set; }
 
-    [JsonIgnore]
     public virtual ICollection<Territory> Territories { get; set; } = new List<Territory>();
 }

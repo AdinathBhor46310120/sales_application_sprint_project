@@ -15,6 +15,8 @@ public partial class NorthwindContext : DbContext
     {
     }
 
+    public virtual DbSet<Admin> Admins { get; set; }
+
     public virtual DbSet<AlphabeticalListOfProduct> AlphabeticalListOfProducts { get; set; }
 
     public virtual DbSet<Category> Categories { get; set; }
@@ -89,11 +91,36 @@ public partial class NorthwindContext : DbContext
 
     public virtual DbSet<VEmployee> VEmployees { get; set; }
 
-   
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=INBLRVM26590142;Database=Northwind;Trusted_Connection=True;Encrypt=False;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+
+        modelBuilder.Entity<Admin>(entity =>
+        {
+            entity.HasKey(e => e.AdminId).HasName("PK__admins__43AA4141B84B170B");
+
+            entity.ToTable("admins");
+
+            entity.Property(e => e.AdminId)
+                .ValueGeneratedNever()
+                .HasColumnName("admin_id");
+            entity.Property(e => e.Email)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.Password)
+                .HasMaxLength(12)
+                .IsUnicode(false)
+                .HasColumnName("password");
+            entity.Property(e => e.Role)
+                .HasMaxLength(8)
+                .IsUnicode(false)
+                .HasColumnName("role");
+        });
 
         modelBuilder.Entity<AlphabeticalListOfProduct>(entity =>
         {
@@ -287,16 +314,28 @@ public partial class NorthwindContext : DbContext
             entity.Property(e => e.BirthDate).HasColumnType("datetime");
             entity.Property(e => e.City).HasMaxLength(15);
             entity.Property(e => e.Country).HasMaxLength(15);
+            entity.Property(e => e.Email)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("email");
             entity.Property(e => e.Extension).HasMaxLength(4);
             entity.Property(e => e.FirstName).HasMaxLength(10);
             entity.Property(e => e.HireDate).HasColumnType("datetime");
             entity.Property(e => e.HomePhone).HasMaxLength(24);
             entity.Property(e => e.LastName).HasMaxLength(20);
             entity.Property(e => e.Notes).HasColumnType("ntext");
+            entity.Property(e => e.Password)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("password");
             entity.Property(e => e.Photo).HasColumnType("image");
             entity.Property(e => e.PhotoPath).HasMaxLength(255);
             entity.Property(e => e.PostalCode).HasMaxLength(10);
             entity.Property(e => e.Region).HasMaxLength(15);
+            entity.Property(e => e.Role)
+                .HasMaxLength(8)
+                .IsUnicode(false)
+                .HasColumnName("role");
             entity.Property(e => e.Title).HasMaxLength(30);
             entity.Property(e => e.TitleOfCourtesy).HasMaxLength(25);
 
@@ -643,7 +682,19 @@ public partial class NorthwindContext : DbContext
         {
             entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
             entity.Property(e => e.CompanyName).HasMaxLength(40);
+            entity.Property(e => e.Email)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.Password)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("password");
             entity.Property(e => e.Phone).HasMaxLength(24);
+            entity.Property(e => e.Role)
+                .HasMaxLength(8)
+                .IsUnicode(false)
+                .HasColumnName("role");
         });
 
         modelBuilder.Entity<SummaryOfSalesByQuarter>(entity =>

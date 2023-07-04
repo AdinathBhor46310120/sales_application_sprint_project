@@ -21,41 +21,86 @@ namespace Sales_Application_Api.Controllers
             _context = context;
         }
 
-        // GET: api/Employees
+        // POST: api/employees
+        [HttpPost]
+        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        {
+            if (_context.Employees == null)
+            {
+                return Problem("Entity set 'NorthwindContext.Employees'  is null.");
+            }
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
+        }
+
+        // GET: api/employees
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-          if (_context.Employees == null)
-          {
-              return NotFound();
-          }
+            if (_context.Employees == null)
+            {
+                return NotFound();
+            }
             return await _context.Employees.ToListAsync();
         }
 
-        // GET: api/Employees/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Employee>> GetEmployee(int id)
-        //{
-        //  //if (_context.Employees == null)
-        //  //{
-        //  //    return NotFound();
-        //  //}
-        //    var employee = await _context.Employees.FindAsync(id);
+        // PATCH: api/employees/5
+        [HttpPatch("edit/{EmployeeID}")]
+        public async Task<IActionResult> PatchShipper(int EmployeeID, JsonPatchDocument<Employee> employeePatch)
+        {
+            var employee = await this._context.Employees.FindAsync(EmployeeID);
 
-        //    if (employee == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (employee != null)
+            {
+                employeePatch.ApplyTo(employee);
+                _context.SaveChanges();
+            }
 
-        //    return employee;
-        //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
-        
+            return NoContent();
+        }
+
+        // PUT: api/employees/5
+        [HttpPut("edit{id}")]
+        public async Task<IActionResult> PutEmployee(int id, Employee employee)
+        {
+            if (id != employee.EmployeeId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(employee).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmployeeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // GET: api/Employees/title
         [HttpGet("title/{title}")]
         public async Task<ActionResult<Employee>> GetEmployeeByTitle(string title)
         {
-            
+
             var employee = await _context.Employees.Where(c => c.Title == title).FirstOrDefaultAsync();
 
             if (employee == null)
@@ -97,7 +142,7 @@ namespace Sales_Application_Api.Controllers
         }
 
         //GET: api/Employees/HireDate
-       [HttpGet("HireDate/{HireDate}")]
+        [HttpGet("HireDate/{HireDate}")]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByDate(DateTime HireDate)
         {
 
@@ -127,51 +172,7 @@ namespace Sales_Application_Api.Controllers
         }
 
 
-        // PUT: api/Employees/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("edit{id}")]
-        public async Task<IActionResult> PutEmployee(int id, Employee employee)
-        {
-            if (id != employee.EmployeeId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(employee).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EmployeeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Employees
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
-        {
-          if (_context.Employees == null)
-          {
-              return Problem("Entity set 'NorthwindContext.Employees'  is null.");
-          }
-            _context.Employees.Add(employee);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
-        }
+        
 
         // DELETE: api/Employees/5
         [HttpDelete("{id}")]
@@ -193,26 +194,7 @@ namespace Sales_Application_Api.Controllers
             return NoContent();
         }
 
-        // PATCH: api/employees/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPatch("edit/{EmployeeID}")]
-        public async Task<IActionResult> PatchShipper(int EmployeeID, JsonPatchDocument<Employee> employeePatch)
-        {
-            var employee = await this._context.Employees.FindAsync(EmployeeID);
-
-            if (employee != null)
-            {
-                employeePatch.ApplyTo(employee);
-                _context.SaveChanges();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            return NoContent();
-        }
+        
 
         private bool EmployeeExists(int id)
         {

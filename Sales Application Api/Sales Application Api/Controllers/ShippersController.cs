@@ -11,6 +11,7 @@ using Sales_Application_Api.Models;
 
 namespace Sales_Application_Api.Controllers
 {
+
     [Route("api/shippers")]
     [ApiController]
     public class ShippersController : ControllerBase
@@ -26,10 +27,10 @@ namespace Sales_Application_Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Shipper>>> GetShippers()
         {
-          if (_context.Shippers == null)
-          {
-              return NotFound();
-          }
+            if (_context.Shippers == null)
+            {
+                return NotFound();
+            }
             return await _context.Shippers.ToListAsync();
         }
 
@@ -37,10 +38,10 @@ namespace Sales_Application_Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Shipper>> GetShipper(int id)
         {
-          if (_context.Shippers == null)
-          {
-              return NotFound();
-          }
+            if (_context.Shippers == null)
+            {
+                return NotFound();
+            }
             var shipper = await _context.Shippers.FindAsync(id);
 
             if (shipper == null)
@@ -57,16 +58,16 @@ namespace Sales_Application_Api.Controllers
 
         public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string CompanyName)
         {
-            var company = await _context.Shippers.Where(c => c.CompanyName== CompanyName).FirstOrDefaultAsync();
+            var company = await _context.Shippers.Where(c => c.CompanyName == CompanyName).FirstOrDefaultAsync();
 
-            if(company == null)
+            if (company == null)
             {
                 return NotFound();
             }
 
             return company;
         }
-   
+
 
         // PUT: api/Shippers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -107,13 +108,13 @@ namespace Sales_Application_Api.Controllers
         {
             var shipper = await this._context.Shippers.FindAsync(ShipperID);
 
-            if(shipper != null)
+            if (shipper != null)
             {
                 shipperPatch.ApplyTo(shipper);
                 _context.SaveChanges();
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -126,10 +127,10 @@ namespace Sales_Application_Api.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> PostShipper(Shipper shipper)
         {
-          if (_context.Shippers == null)
-          {
-              return Problem("Entity set 'NorthwindContext.Shippers'  is null.");
-          }
+            if (_context.Shippers == null)
+            {
+                return Problem("Entity set 'NorthwindContext.Shippers'  is null.");
+            }
             _context.Shippers.Add(shipper);
             await _context.SaveChangesAsync();
 

@@ -24,10 +24,10 @@ namespace Sales_Application_Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Territory>>> GetTerritories()
         {
-          if (_context.Territories == null)
-          {
-              return NotFound();
-          }
+            if (_context.Territories == null)
+            {
+                return NotFound();
+            }
             return await _context.Territories.ToListAsync();
         }
 
@@ -67,10 +67,10 @@ namespace Sales_Application_Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Territory>> PostTerritory(Territory territory)
         {
-          if (_context.Territories == null)
-          {
-              return Problem("Entity set 'NorthwindContext.Territories'  is null.");
-          }
+            if (_context.Territories == null)
+            {
+                return Problem("Entity set 'NorthwindContext.Territories'  is null.");
+            }
             _context.Territories.Add(territory);
             try
             {
