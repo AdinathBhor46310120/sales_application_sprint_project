@@ -20,18 +20,47 @@ namespace Sales_Application_Api.Controllers
             _context = context;
         }
 
-        // GET: api/Territories
+        // POST: api/territory
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Territory>> PostTerritory(Territory territory)
+        {
+            if (_context.Territories == null)
+            {
+                return Problem("Entity set 'NorthwindContext.Territories'  is null.");
+            }
+            _context.Territories.Add(territory);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (TerritoryExists(territory.TerritoryId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetTerritory", new { id = territory.TerritoryId }, territory);
+        }
+
+        // GET: api/territory
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Territory>>> GetTerritories()
         {
-          if (_context.Territories == null)
-          {
-              return NotFound();
-          }
+            if (_context.Territories == null)
+            {
+                return NotFound();
+            }
             return await _context.Territories.ToListAsync();
         }
 
-        // PUT: api/Territories/5
+        // PUT: api/territory/edit/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("edit/{id}")]
         public async Task<IActionResult> PutTerritory(string id, Territory territory)
@@ -62,34 +91,7 @@ namespace Sales_Application_Api.Controllers
             return NoContent();
         }
 
-        // POST: api/Territories
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Territory>> PostTerritory(Territory territory)
-        {
-          if (_context.Territories == null)
-          {
-              return Problem("Entity set 'NorthwindContext.Territories'  is null.");
-          }
-            _context.Territories.Add(territory);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (TerritoryExists(territory.TerritoryId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetTerritory", new { id = territory.TerritoryId }, territory);
-        }
+        
 
         private bool TerritoryExists(string id)
         {

@@ -11,6 +11,7 @@ using Sales_Application_Api.Models;
 
 namespace Sales_Application_Api.Controllers
 {
+
     [Route("api/shippers")]
     [ApiController]
     public class ShippersController : ControllerBase
@@ -22,51 +23,31 @@ namespace Sales_Application_Api.Controllers
             _context = context;
         }
 
-        // GET: api/Shippers
+        // POST: api/shipper
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<string>> PostShipper(Shipper shipper)
+        {
+            if (_context.Shippers == null)
+            {
+                return Problem("Entity set 'NorthwindContext.Shippers'  is null.");
+            }
+            _context.Shippers.Add(shipper);
+            await _context.SaveChangesAsync();
+
+            return Ok("Record Created Successfully");
+        }
+
+        // GET: api/shipper
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Shipper>>> GetShippers()
         {
-          if (_context.Shippers == null)
-          {
-              return NotFound();
-          }
+            if (_context.Shippers == null)
+            {
+                return NotFound();
+            }
             return await _context.Shippers.ToListAsync();
         }
-
-        // GET: api/Shippers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Shipper>> GetShipper(int id)
-        {
-          if (_context.Shippers == null)
-          {
-              return NotFound();
-          }
-            var shipper = await _context.Shippers.FindAsync(id);
-
-            if (shipper == null)
-            {
-                return NotFound();
-            }
-
-            return shipper;
-        }
-
-        //GET: api/shipper/{companyname}
-
-        [HttpGet("{CompanyName}")]
-
-        public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string CompanyName)
-        {
-            var company = await _context.Shippers.Where(c => c.CompanyName== CompanyName).FirstOrDefaultAsync();
-
-            if(company == null)
-            {
-                return NotFound();
-            }
-
-            return company;
-        }
-   
 
         // PUT: api/Shippers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -99,7 +80,6 @@ namespace Sales_Application_Api.Controllers
             return NoContent();
         }
 
-
         // PATCH: api/Shippers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPatch("edit/{ShipperID}")]
@@ -107,13 +87,13 @@ namespace Sales_Application_Api.Controllers
         {
             var shipper = await this._context.Shippers.FindAsync(ShipperID);
 
-            if(shipper != null)
+            if (shipper != null)
             {
                 shipperPatch.ApplyTo(shipper);
                 _context.SaveChanges();
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -121,40 +101,94 @@ namespace Sales_Application_Api.Controllers
             return NoContent();
         }
 
-        // POST: api/Shippers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<string>> PostShipper(Shipper shipper)
-        {
-          if (_context.Shippers == null)
-          {
-              return Problem("Entity set 'NorthwindContext.Shippers'  is null.");
-          }
-            _context.Shippers.Add(shipper);
-            await _context.SaveChangesAsync();
+        //GET: api/shipper/{companyname}
 
-            return Ok("Record Created Successfully");
-        }
+        [HttpGet("{CompanyName}")]
 
-        // DELETE: api/Shippers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteShipper(int id)
+        public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string CompanyName)
         {
-            if (_context.Shippers == null)
-            {
-                return NotFound();
-            }
-            var shipper = await _context.Shippers.FindAsync(id);
-            if (shipper == null)
+            var company = await _context.Shippers.Where(c => c.CompanyName == CompanyName).FirstOrDefaultAsync();
+
+            if (company == null)
             {
                 return NotFound();
             }
 
-            _context.Shippers.Remove(shipper);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return company;
         }
+
+
+        /*
+             //GET: api/shipper/totalshipment
+
+            [HttpGet("{CompanyName}")]
+
+            public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string CompanyName)
+            {
+                var company = await _context.Shippers.Where(c => c.CompanyName == CompanyName).FirstOrDefaultAsync();
+
+                if (company == null)
+                {
+                    return NotFound();
+                }
+
+                return company;
+             }
+        */
+        /*
+             //GET: api/shipper/totalamountearnedbyshipper
+
+            [HttpGet("{CompanyName}")]
+
+            public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string CompanyName)
+            {
+                var company = await _context.Shippers.Where(c => c.CompanyName == CompanyName).FirstOrDefaultAsync();
+
+                if (company == null)
+                {
+                    return NotFound();
+                }
+
+                return company;
+             }
+            
+         */
+        /*
+             //GET: api/shipper/totalamountearnedbyshipper/{date}
+
+            [HttpGet("{CompanyName}")]
+
+            public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string CompanyName)
+            {
+                var company = await _context.Shippers.Where(c => c.CompanyName == CompanyName).FirstOrDefaultAsync();
+
+                if (company == null)
+                {
+                    return NotFound();
+                }
+
+                return company;
+             }
+            
+         */
+        /*
+             //GET: /api/shipper/totalamountearnedbyshipper/{year}
+
+            [HttpGet("{CompanyName}")]
+
+            public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string CompanyName)
+            {
+                var company = await _context.Shippers.Where(c => c.CompanyName == CompanyName).FirstOrDefaultAsync();
+
+                if (company == null)
+                {
+                    return NotFound();
+                }
+
+                return company;
+             }
+            
+         */
 
         private bool ShipperExists(int id)
         {
