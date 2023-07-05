@@ -10,11 +10,15 @@
         "projectUniqueName": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\Sales Application Api.csproj",
         "projectName": "Sales Application Api",
         "projectPath": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\Sales Application Api.csproj",
-        "packagesPath": "C:\\Users\\adbhor\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\suyasjad\\.nuget\\packages\\",
         "outputPath": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\adbhor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\suyasjad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

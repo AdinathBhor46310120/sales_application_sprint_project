@@ -78,7 +78,7 @@ namespace Sales_Application_Api.Controllers
 
         // PATCH: api/employee/edit/5
         [HttpPatch("edit/{EmployeeID}")]
-        public async Task<IActionResult> PatchShipper(int EmployeeID, JsonPatchDocument<Employee> employeePatch)
+        public async Task<IActionResult> PatchEmployee(int EmployeeID, JsonPatchDocument<Employee> employeePatch)
         {
             var employee = await this._context.Employees.FindAsync(EmployeeID);
 

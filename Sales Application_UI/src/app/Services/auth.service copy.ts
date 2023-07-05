@@ -2,10 +2,10 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { EmployeeRegisterRequest } from '../Models/employee-register-request';
+import { AuthorRegisterRequest } from '../Models/employee-register-request';
 import { LoginRequest } from '../Models/login-request';
 import { LoginResponse } from '../Models/login-response';
-import { ShipperRegisterRequest } from '../Models/shipper-register-request';
+import { PublisherRegisterRequest } from '../Models/shipper-register-request';
 import { RegisterResponse } from '../Models/register-response';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -14,7 +14,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  private baseUrl:string = "https://localhost:7127/api/auth";
+  private baseUrl:string = "https://localhost:7022/api/auth";
   private userPayload:any;
 
   constructor(private http:HttpClient,private router:Router) { 
@@ -22,24 +22,32 @@ export class AuthService {
   }
 
   login(request : LoginRequest) : Observable<LoginResponse>{
-    console.log(request);
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`,request);
   }
 
-  signupShipper(request : ShipperRegisterRequest){
-    console.log(request);
-    return this.http.post<RegisterResponse>(`${this.baseUrl}/shipper-register`,request)
+  signupAuthor(request : AuthorRegisterRequest){
+    return this.http.post<RegisterResponse>(`${this.baseUrl}/author/register`,request)
   }
 
-  signupEmployee(request: FormData){
-    console.log(request);
-    return this.http.post<RegisterResponse>(`${this.baseUrl}/employee-register`,request);
+  signupPublisher(request: FormData){
+    return this.http.post<RegisterResponse>(`${this.baseUrl}/publisher/register`,request);
   }
 
-  signupAdmin(request: any){
-    console.log(request);
-    return this.http.post<RegisterResponse>(`${this.baseUrl}/admin-register`,request);
-  }
+  // public uplodeFile(file:File,pubId:string) {
+  //   const headers = new HttpHeaders()
+  //     .append('Content-Type', 'multipart/form-data');
+
+  //     console.log("INside upload file");
+  //     const formData: FormData = new FormData();
+  //     formData.append('file',file);
+  //     formData.append('PubId',pubId);
+  //     formData.append('FileName',file.name);
+
+  //   console.log("INside upload file");
+  //   console.log(formData);
+
+  //   return this.http.post(`${this.baseUrl}/UploadFile`,formData, { headers, observe: 'response' });
+  // }
 
   storeToken(token:string)
   {
