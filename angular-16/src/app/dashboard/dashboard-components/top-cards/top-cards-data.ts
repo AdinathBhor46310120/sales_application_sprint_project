@@ -19,12 +19,12 @@ export const topcards: topcard[] = [
         title: '$1k',
         subtitle: 'Refund given'
     },
-    {
-        bgcolor: 'warning',
-        icon: 'bi bi-basket3',
-        title: '456',
-        subtitle: 'Yearly Project'
-    },
+    // {
+    //     bgcolor: 'warning',
+    //     icon: 'bi bi-basket3',
+    //     title: '456',
+    //     subtitle: 'Yearly Project'
+    // },
     {
         bgcolor: 'info',
         icon: 'bi bi-bag',
