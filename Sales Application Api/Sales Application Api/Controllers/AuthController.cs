@@ -23,22 +23,6 @@ namespace Sales_Application_Api.Controllers
             this._context = context;
         }
 
-        [HttpGet("/changepass")]
-        public async Task<ActionResult<string>> Change()
-        {
-            var emps = await _context.Employees.ToListAsync();
-            emps.ForEach(emp =>
-            {
-                
-                
-                emp.Password = PasswordHelper.Encode(emp.Password);
-
-                _context.SaveChanges();
-            });
-
-            return Ok("changed emp");
-        }
-
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
         {
@@ -57,6 +41,11 @@ namespace Sales_Application_Api.Controllers
                 {
                     return NotFound(new { Message = "User Not Found" });
                 }
+                if (!PasswordHelper.Decode(request.Password, user.Password))
+                {
+
+                    return BadRequest("Password Is Incorrect");
+                }
 
                 response.Token = CreateJWT(user);
                 response.Message = "Logged In Successfully";
@@ -68,6 +57,12 @@ namespace Sales_Application_Api.Controllers
                 if (user == null)
                 {
                     return NotFound(new { Message = "User Not Found" });
+                }
+
+                if (!PasswordHelper.Decode(request.Password, user.Password))
+                {
+
+                    return BadRequest("Password Is Incorrect");
                 }
 
                 response.Token = CreateJWT(user);
@@ -82,24 +77,26 @@ namespace Sales_Application_Api.Controllers
                     return NotFound(new { Message = "User Not Found" });
                 }
 
+                if (!PasswordHelper.Decode(request.Password, user.Password))
+                {
+
+                    return BadRequest("Password Is Incorrect");
+                }
+
                 response.Token = CreateJWT(user);
                 response.Message = "Logged In Successfully";
             }
 
-            
 
-            //if (!PasswordHelper.Decode(request.Password, user.Password))
-            //{
-            //    await Console.Out.WriteLineAsync(request.Password + " ---------------- " + user.Password);
-            //    return BadRequest("Password Is Incorrect");
-            //}
+
+            
 
             return Ok(response);
         }
 
 
         [HttpPost("admin-register")]
-        public async Task<ActionResult<string>> RegisterAdmin([FromForm] AdminRegisterRequest request)
+        public async Task<ActionResult<string>> RegisterAdmin([FromBody] AdminRegisterRequest request)
         {
             if (request == null)
             {
@@ -111,7 +108,8 @@ namespace Sales_Application_Api.Controllers
             }
 
             Admin admin = new Admin()
-            {
+            {   
+                 AdminId = GenerateAuthorId(),
                  Email = request.Email,
                  Password = PasswordHelper.Encode(request.Password),
                  Role = request.Role
@@ -120,7 +118,7 @@ namespace Sales_Application_Api.Controllers
             await _context.AddAsync(admin);
             await _context.SaveChangesAsync();
 
-            return Ok("User Registered Successfully");
+            return Ok( new { message = "User Registered Successfully" });
         }
 
         [HttpPost("employee-register")]
@@ -134,6 +132,11 @@ namespace Sales_Application_Api.Controllers
             {
                 return BadRequest("Email Already Exists");
             }
+
+
+            await using var memoryStream = new MemoryStream();
+            await request.Photo.CopyToAsync(memoryStream);
+            byte[] arr = memoryStream.ToArray();
 
             Employee employee = new Employee()
             {
@@ -154,7 +157,7 @@ namespace Sales_Application_Api.Controllers
                 HomePhone = request.HomePhone,
                 Extension = request.Extension,
                 PhotoPath = request.PhotoPath,
-                Photo = GetFileBytes(request.Photo),
+                Photo = arr,
                 Notes = request.Notes,
                 ReportsTo = request.ReportsTo
                 };
@@ -162,11 +165,11 @@ namespace Sales_Application_Api.Controllers
             await _context.AddAsync(employee);
             await _context.SaveChangesAsync();
 
-            return Ok("User Registered Successfully");
+            return Ok(new { message = "User Registered Successfully" });
         }
 
         [HttpPost("shipper-register")]
-        public async Task<ActionResult<string>> RegisterShipper([FromForm] ShipperRegisterRequest request)
+        public async Task<ActionResult<string>> RegisterShipper([FromBody] ShipperRegisterRequest request)
         {
             if (request == null)
             {
@@ -180,7 +183,7 @@ namespace Sales_Application_Api.Controllers
             Shipper shipper = new Shipper()
             {
                 Email = request.Email,
-                Password = request.Password,
+                Password = PasswordHelper.Encode(request.Password),
                 Role = request.Role,
                 Phone = request.Phone,
                 CompanyName = request.CompanyName
@@ -189,7 +192,7 @@ namespace Sales_Application_Api.Controllers
             await _context.AddAsync(shipper);
             await _context.SaveChangesAsync();
 
-            return Ok("User Registered Successfully");
+            return Ok(new { message = "User Registered Successfully" });
         }
 
         private async Task<bool> CheckEmailExistsAsync(string email)
@@ -281,11 +284,10 @@ namespace Sales_Application_Api.Controllers
             return jwtTokenHandler.WriteToken(token);
         }
 
-        private string GenerateAuthorId()
+        private int GenerateAuthorId()
         {
             Random rd = new Random();
-            string id = rd.Next(100, 999).ToString() + "-" + rd.Next(100, 999).ToString() + "-" + rd.Next(100, 999).ToString();
-            return id;
+            return rd.Next(1000, 9999);
         }
 
         private byte[] GetFileBytes(IFormFile formFile)
