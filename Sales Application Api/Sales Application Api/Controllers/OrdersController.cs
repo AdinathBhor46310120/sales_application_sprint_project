@@ -31,14 +31,14 @@ namespace Sales_Application_Api.Controllers
             return await _context.Orders.ToListAsync();
         }
 
-
+/*
         //Get: api/orders/orderbyemployee/{Firstname}
         //Display all the Order placed by an Employee
         [HttpGet("{FirstName}")]
 
         public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string FirstName)
         {
-            List < names > = new List<>();
+            List <names> = new List<>();
 
             var firstname = await _context.Orders.Where(o => o.FirstName == FirstName).FirstOrDefaultAsync();
 
@@ -49,7 +49,7 @@ namespace Sales_Application_Api.Controllers
 
             return await _context.Orders.ToListAsync();
         }
-         
+  */       
 
         // GET: api/shitpdetails/5
         [HttpGet("shipdetails/{id}")]
