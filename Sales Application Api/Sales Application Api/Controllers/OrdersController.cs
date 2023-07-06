@@ -36,19 +36,19 @@ namespace Sales_Application_Api.Controllers
         //Display all the Order placed by an Employee
         [HttpGet("{FirstName}")]
 
-        public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string FirstName)
-        {
-            List < names > = new List<>();
+        //public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string FirstName)
+        //{
+        //    //List < names > = new List<>();
 
-            var firstname = await _context.Orders.Where(o => o.FirstName == FirstName).FirstOrDefaultAsync();
+        //    var firstname = await _context.Orders.Where(o => o. == FirstName).FirstOrDefaultAsync();
 
-            if (firstname == null)
-            {
-                return NotFound();
-            }
+        //    if (firstname == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return await _context.Orders.ToListAsync();
-        }
+        //    return await _context.Orders.ToListAsync();
+        //}
          
 
         // GET: api/shitpdetails/5

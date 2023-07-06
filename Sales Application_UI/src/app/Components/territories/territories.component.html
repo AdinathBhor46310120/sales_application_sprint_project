@@ -1,0 +1,42 @@
+<div class="filters">
+    <form [formGroup]="searchForm">
+        <div class="row">
+            <div class="col-3">
+                <select class="form-select" aria-label="Default select example" formControlName="option" (change)=" OnSelectChange($event)">
+                    <!-- <option selected>Open this select menu</option> -->
+                    <option value="all">All</option>
+                    <option value="region">Region</option>
+                  </select>
+            </div>
+            <div class="col-6 d-flex">
+                <input class="form-control mr-sm-2" type="search" formControlName="search" placeholder="Search"
+                    aria-label="Search" *ngIf="!isAllSelected">
+                <button class="btn btn-outline-success my-2 my-sm-0" (click)="Search()">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="wrapper">
+    <div class="holder">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Territorie ID</th>
+                    <th scope="col">Region ID</th>
+                    <th scope="col">Territorie Disctiption</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let territorie of territories">
+                    <td scoped="row">{{territorie.territoryId}}</td>
+                    <td scoped="row">{{territorie.regionId}}</td>
+                    <td scoped="row">{{territorie.territoryDescription}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- regionId!:number;
+territoryDescription!:string;
+territoryId!:string; -->

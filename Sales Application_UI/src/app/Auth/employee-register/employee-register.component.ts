@@ -43,10 +43,8 @@ export class EmployeeRegisterComponent implements OnInit{
   }
 
   onSubmit() {
-    alert("hello");
     if (this.registerForm.valid) {
       var obj = this.registerForm.value;
-      console.log(this.registerForm.value);
       var formData = new FormData();
       formData.append('titleofcourtesy', this.registerForm.value.titleofcourtesy);
       formData.append('title', this.registerForm.value.title);
@@ -77,7 +75,7 @@ export class EmployeeRegisterComponent implements OnInit{
           this.router.navigate(["login"])
         },
         error: (err) => {
-          this.toast.error({detail:'Error',summary:err.error, duration:5000});
+          this.toast.error({detail:'Error',summary:err.error.message, duration:5000});
         }
       });
     }
@@ -96,7 +94,6 @@ export class EmployeeRegisterComponent implements OnInit{
       photo: file
     });
 
-    console.log(this.registerForm);
 
     this.cd.markForCheck();
   };

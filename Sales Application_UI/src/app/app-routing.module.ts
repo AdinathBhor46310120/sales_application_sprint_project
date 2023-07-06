@@ -3,21 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { ShipperRegisterComponent } from './Auth/shipper-register/shipper-register.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { EmployeeRegisterComponent } from './Auth/employee-register/employee-register.component';
-import { TitleComponent } from './Components/title/title.component';
 import { HomeComponent } from './Layout/home/home.component';
 import { AdminRegisterComponent } from './Auth/admin-register/admin-register.component';
 import { AuthGuard } from './Services/auth.guard';
 import { LogGuard } from './Services/log.guard';
+import { EmployeesComponent } from './Components/employees/employees.component';
+import { TerritoriesComponent } from './Components/territories/territories.component';
 
 const routes: Routes = [
-  {path:"",component:LoginComponent},
+  {path:"",component:LoginComponent,canActivate:[LogGuard]},
   {path:"login",component:LoginComponent,canActivate:[LogGuard]},
   {path:"admin-register",component:AdminRegisterComponent,canActivate:[LogGuard]},
-  {path:"author-register",component:ShipperRegisterComponent,canActivate:[LogGuard]},
-  {path:"publisher-register",component:EmployeeRegisterComponent},
+  {path:"shipper-register",component:ShipperRegisterComponent,canActivate:[LogGuard]},
+  {path:"employee-register",component:EmployeeRegisterComponent},
   {path:"home",component:HomeComponent,children: 
   [
-    {path:"title",component:TitleComponent}
+    {path:"employees",component:EmployeesComponent},
+    {path:"territories",component:TerritoriesComponent}
   ],canActivate:[AuthGuard]}
 ];
 

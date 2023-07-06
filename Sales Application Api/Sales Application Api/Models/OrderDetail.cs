@@ -7,7 +7,7 @@ namespace Sales_Application_Api.Models;
 
 public partial class OrderDetail
 {
-    [Key]
+    //[Key]
     public int OrderId { get; set; }
 
     [Required]

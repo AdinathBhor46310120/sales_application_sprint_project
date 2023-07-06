@@ -27,21 +27,18 @@ export class LoginComponent implements OnInit{
 
   onSubmit(){
     if(this.loginForm.valid){
-      alert("hello");
       this.authService.login(this.loginForm.value).subscribe({
         next:(res)=> {
-          // console.log("hello");
           this.authService.storeToken(res.token);
           this.toast.success({detail:'Success',summary:res.message, duration:5000});
           let payload = this.authService.decodedToken();
           this.jwtService.setEmail(payload.email);
           this.jwtService.setRole(payload.role);
-          // console.log(res);
           this.loginForm.reset();
           this.router.navigate(["home"])
         },
         error:(err) => {
-          this.toast.error({detail:'Error',summary:"Incorrect Password", duration:5000});
+          this.toast.error({detail:'Error',summary:err.error.message, duration:5000});
         }
       })
     }

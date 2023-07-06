@@ -6,6 +6,10 @@
     height: 100%;
 }
 
+.gold{
+    color: gold;
+  }
+
 .form-control:focus{
     outline: 1.3px solid black !important;
     border: none !important;

@@ -35,8 +35,6 @@ export class ShipperRegisterComponent implements OnInit{
   }
 
   onSubmit(){
-    alert("hello");
-    console.log(this.registerForm.value);
     if(this.registerForm.valid){
       var obj = this.registerForm.value;
       let request = new ShipperRegisterRequest();
@@ -49,14 +47,12 @@ export class ShipperRegisterComponent implements OnInit{
 
       this.authService.signupShipper(request).subscribe({
         next:(res)=> {
-          console.log(res)
           this.toast.success({detail:'Success',summary:res.message, duration:5000});
           this.registerForm.reset();
           this.router.navigate(["login"])
         },
         error:(err) => {
-          console.log(err);
-          this.toast.error({detail:'Error',summary:err.error, duration:5000});
+          this.toast.error({detail:'Error',summary:err.error.message, duration:5000});
         }
       });
     }

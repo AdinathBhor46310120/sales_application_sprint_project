@@ -34,8 +34,6 @@ export class AdminRegisterComponent implements OnInit{
   }
 
   onSubmit(){
-    alert("hello");
-    console.log(this.registerForm.value);
     if(this.registerForm.valid){
       var obj = this.registerForm.value;
       let request:any= {
@@ -43,19 +41,15 @@ export class AdminRegisterComponent implements OnInit{
         password:obj.password,
         role:obj.role
       }
-     
-      console.log(request);
 
       this.authService.signupAdmin(request).subscribe({
         next:(res)=> {
-          console.log(res)
           this.toast.success({detail:'Success',summary:res.message, duration:5000});
           this.registerForm.reset();
           this.router.navigate(["login"])
         },
         error:(err) => {
-          console.log(err);
-          this.toast.error({detail:'Error',summary:err.error, duration:5000});
+          this.toast.error({detail:'Error',summary:err.error.message, duration:5000});
         }
       });
     }

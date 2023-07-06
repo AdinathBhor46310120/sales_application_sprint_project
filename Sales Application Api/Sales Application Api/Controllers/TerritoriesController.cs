@@ -60,6 +60,36 @@ namespace Sales_Application_Api.Controllers
             return await _context.Territories.ToListAsync();
         }
 
+        // GET: api/territory
+        [HttpGet("/changedisc")]
+        public async Task<ActionResult<string>> change()
+        {
+            var terrs = await _context.Territories.ToListAsync();
+            foreach(var terr in terrs)
+            {
+                terr.TerritoryDescription = terr.TerritoryDescription.Trim();
+                await Console.Out.WriteLineAsync(terr.TerritoryDescription);
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok("changed");
+        }
+
+        // GET: api/territory/region/{region}
+        [HttpGet("region/{region}")]
+        public async Task<ActionResult<IEnumerable<Territory>>> GetTerritoriesOfRegion(string region)
+        {
+            var regionObj = await _context.Regions.Where(r => r.RegionDescription == region).FirstOrDefaultAsync();
+
+            if (regionObj == null)
+            {
+                return BadRequest("Region Do Not Exist");
+            }
+            
+            return await _context.Territories.Where(tr => tr.RegionId == regionObj.RegionId).ToListAsync();
+
+        }
+
         // PUT: api/territory/edit/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("edit/{id}")]

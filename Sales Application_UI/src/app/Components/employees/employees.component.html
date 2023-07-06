@@ -1,0 +1,69 @@
+<div class="filters">
+    <form [formGroup]="searchForm">
+        <div class="row">
+            <div class="col-3">
+                <select class="form-select" aria-label="Default select example" formControlName="option" (change)="OnSelectChange($event)">
+                    <!-- <option selected>Open this select menu</option> -->
+                    <option value="title">Title</option>
+                    <option value="city">City</option>
+                    <option value="region">Region</option>
+                    <option value="hireDate">Hire Date</option>
+                    <option value="highestSale">Highets Sale</option>
+                    <option value="lowestSale">Lowest Sale</option>
+                  </select>
+            </div>
+            <div class="col-6 d-flex">
+                <input type="date" name="date" class="form-control" formControlName="date" id="date" *ngIf="isThereDate">
+                <input class="form-control mr-sm-2" type="search" formControlName="search" placeholder="Search"
+                    aria-label="Search" *ngIf="!isThereDate">
+                <button class="btn btn-outline-success my-2 my-sm-0" (click)="Search()">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="wrapper">
+    <div class="holder">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Employee ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Tile of Courtesy</th>
+                    <th scope="col">Birth Date</th>
+                    <th scope="col">Hire Date</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Region</th>
+                    <th scope="col">Postal Code</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Home Phone</th>
+                    <th scope="col">Extention</th>
+                    <th scope="col">Notes</th>
+                    <th scope="col">Reports To</th>
+                    <th scope="col">Photo Path</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees">
+                    <th scope="row">{{employee.employeeId}}</th>
+                    <td scoped="row">{{employee.lastName}}</td>
+                    <td scoped="row">{{employee.firstName}}</td>
+                    <td scoped="row">{{employee.titleOfCourtesy}}</td>
+                    <td scoped="row">{{employee.birthDate}}</td>
+                    <td scoped="row">{{employee.hireDate}}</td>
+                    <td scoped="row">{{employee.address}}</td>
+                    <td scoped="row">{{employee.city}}</td>
+                    <td scoped="row">{{employee.region}}</td>
+                    <td scoped="row">{{employee.postalCode}}</td>
+                    <td scoped="row">{{employee.country}}</td>
+                    <td scoped="row">{{employee.homePhone}}</td>
+                    <td scoped="row">{{employee.extension}}</td>
+                    <td scoped="row">{{employee.notes}}</td>
+                    <td scoped="row">{{employee.reportsTo}}</td>
+                    <td scoped="row">{{employee.photoPath}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

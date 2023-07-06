@@ -98,17 +98,17 @@ namespace Sales_Application_Api.Controllers
 
         // GET: api/employees/title/{title}
         [HttpGet("title/{title}")]
-        public async Task<ActionResult<Employee>> GetEmployeeByTitle(string title)
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByTitle(string title)
         {
 
-            var employee = await _context.Employees.Where(c => c.Title == title).FirstOrDefaultAsync();
+            var employees = await _context.Employees.Where(c => c.Title == title).ToListAsync();
 
-            if (employee == null)
+            if (employees == null)
             {
                 return NotFound();
             }
 
-            return employee;
+            return employees;
         }
 
         // GET: api/employee/City/{City}
@@ -143,10 +143,10 @@ namespace Sales_Application_Api.Controllers
 
         //GET: api/Employees/HireDate
         [HttpGet("HireDate/{HireDate}")]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByDate(DateTime HireDate)
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeeByDate(string HireDate)
         {
-
-            var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+            DateTime date = DateTime.Parse(HireDate);
+            var employees = await _context.Employees.Where(c => c.HireDate == date).ToListAsync();
 
             if (employees == null)
             {
@@ -156,21 +156,16 @@ namespace Sales_Application_Api.Controllers
             return employees;
         }
 
-        /*
-        //GET: api/Employees/highestsalebyemployee/{date}
-        [HttpGet("highestsalebyemployee/{date}")]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
-        {
+        ////GET: api/Employees/highestsalebyemployee/{date}
+        //[HttpGet("highestsalebyemployee/{date}")]
+        //public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee()
+        //{
 
-            var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+        //    var salesTotalByAmount = _context.SalesTotalsByAmounts.OrderByDescending(sta => sta.SaleAmount);
 
-            if (employees == null)
-            {
-                return NotFound();
-            }
-
-            return employees;
-        }*/
+        //    var 
+    
+        //}
 
         /*
        //GET: api/Employees/highestsalebyemployee/{year}

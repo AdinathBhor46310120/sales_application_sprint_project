@@ -1,5 +1,30 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
-<p>home works!</p>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Sales Application</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button class="nav-link active" aria-current="page" (click)="logout()">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- The sidebar -->
+<div class="sidebar">
+    <a routerLink="/home/territories">Territorie</a>
+    <a routerLink="/home/employees">Employee Details</a>
+    <a href="#contact">Shipper Details</a>
+    <a href="#about">Territories</a>
+    <a href="#about">Ship Details</a>
+</div>
+
+<!-- Page content -->
+<div class="content">
+    <router-outlet></router-outlet>
+</div>
