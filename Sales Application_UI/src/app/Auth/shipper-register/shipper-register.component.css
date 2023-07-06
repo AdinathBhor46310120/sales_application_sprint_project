@@ -18,7 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom, #6f20dc 50%, #c0d0f5 50%);
+    background:  gold;
   }
   
 
@@ -38,7 +38,7 @@
     bottom: 0;
     height: 3px;
     width: 18px;
-    background: rgb(127, 34, 213);
+    background: gold;
 }
 
 form{
@@ -96,7 +96,7 @@ input {
 
 button{
     color: #fff;
-    background-color: rgb(134, 52, 229);
+    background-color: gold;
     /* Change background color */
     border-radius: 10px;
     /* Use same border-radius as input boxes */

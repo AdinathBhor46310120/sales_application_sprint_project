@@ -18,7 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom, #7c28d5 50%, #c0d0f5 50%);
+    background: gold;
   }
   
 
@@ -38,7 +38,7 @@
     bottom: 0;
     height: 3px;
     width: 18px;
-    background: rgb(121, 30, 217);
+    background: gold;
 }
 
 form{
@@ -96,7 +96,7 @@ input {
 
 button{
     color: #fff;
-    background-color: rgb(158, 54, 237);
+    background-color: gold;
     /* Change background color */
     border-radius: 10px;
     /* Use same border-radius as input boxes */
@@ -165,7 +165,7 @@ input[type=file]{
 input[type=file]::file-selector-button {
     margin-right: 20px;
     border: none;
-    background: #5b18bf;
+    background: gold;
     padding: 5px 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -176,7 +176,7 @@ input[type=file]::file-selector-button {
   }
   
   input[type=file]::file-selector-button:hover {
-    background: #651cd2;
+    background: gold;
   }
 
 #logo{
@@ -188,7 +188,7 @@ textarea:focus {
     /* Styles for input box when focused */
     outline: none;
     border-color: rgba(55, 80, 235, 255);
-    box-shadow: 0 0 0 2px rgba(55, 80, 235, 0.2);
+    box-shadow: 0 0 0 2px gold;
 }
 
 #prinfo{
