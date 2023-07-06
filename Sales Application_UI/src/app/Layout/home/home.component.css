@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: #f1f1f1;
+    background-color: #000000;
     position: fixed;
     height: 100%;
     overflow: auto;
@@ -13,7 +13,7 @@
   /* Sidebar links */
   .sidebar a {
     display: block;
-    color: black;
+    color: rgb(255, 255, 255);
     padding: 16px;
     text-decoration: none;
   }
