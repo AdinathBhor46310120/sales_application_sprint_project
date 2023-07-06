@@ -9,7 +9,5 @@ namespace Sales_Application_Api.Models;
 public partial class MyView
 {
     public string CompanyName { get; set; } = null!;
-
-    [Required]
     public string? City { get; set; }
 }

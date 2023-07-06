@@ -31,14 +31,20 @@ namespace Sales_Application_Api.Controllers
             return await _context.Orders.ToListAsync();
         }
 
-
+/*
         //Get: api/orders/orderbyemployee/{Firstname}
         //Display all the Order placed by an Employee
         [HttpGet("{FirstName}")]
 
+<<<<<<< HEAD
         //public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string FirstName)
         //{
         //    //List < names > = new List<>();
+=======
+        public async Task<ActionResult<Shipper>> GetShipperByCompanyName(string FirstName)
+        {
+            List <names> = new List<>();
+>>>>>>> 3a6f3f4cb2554db077b20d12d6b814e3c1eba803
 
         //    var firstname = await _context.Orders.Where(o => o. == FirstName).FirstOrDefaultAsync();
 
@@ -47,9 +53,15 @@ namespace Sales_Application_Api.Controllers
         //        return NotFound();
         //    }
 
+<<<<<<< HEAD
         //    return await _context.Orders.ToListAsync();
         //}
          
+=======
+            return await _context.Orders.ToListAsync();
+        }
+  */       
+>>>>>>> 3a6f3f4cb2554db077b20d12d6b814e3c1eba803
 
         // GET: api/shitpdetails/5
         [HttpGet("shipdetails/{id}")]

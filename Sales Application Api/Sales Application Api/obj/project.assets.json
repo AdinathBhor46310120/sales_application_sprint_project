@@ -11563,8 +11563,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\suyasjad\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+=======
+<<<<<<< HEAD
+    "C:\\Users\\SUTTARKA\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\adbhor\\.nuget\\packages\\": {}
+>>>>>>> 05d9414c5e4395835a52eddd07fd75dbe045272b
+>>>>>>> 3a6f3f4cb2554db077b20d12d6b814e3c1eba803
   },
   "project": {
     "version": "1.0.0",
@@ -11572,15 +11580,31 @@
       "projectUniqueName": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\Sales Application Api.csproj",
       "projectName": "Sales Application Api",
       "projectPath": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\Sales Application Api.csproj",
+<<<<<<< HEAD
       "packagesPath": "C:\\Users\\suyasjad\\.nuget\\packages\\",
+=======
+<<<<<<< HEAD
+      "packagesPath": "C:\\Users\\SUTTARKA\\.nuget\\packages\\",
+      "outputPath": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\SUTTARKA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+      "packagesPath": "C:\\Users\\adbhor\\.nuget\\packages\\",
+>>>>>>> 3a6f3f4cb2554db077b20d12d6b814e3c1eba803
       "outputPath": "C:\\sales_application_sprint_project\\Sales Application Api\\Sales Application Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\suyasjad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+        "C:\\Users\\adbhor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 05d9414c5e4395835a52eddd07fd75dbe045272b
+>>>>>>> 3a6f3f4cb2554db077b20d12d6b814e3c1eba803
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

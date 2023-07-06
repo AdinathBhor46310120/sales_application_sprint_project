@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sales_Application_Api.Models;
 
 public partial class Shipper 
 {
+    [Key]
     public int ShipperId { get; set; }
 
+    [Required]
     public string CompanyName { get; set; } = null!;
 
     public string? Phone { get; set; }
