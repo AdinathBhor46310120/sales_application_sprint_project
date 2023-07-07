@@ -1,0 +1,10 @@
+.wrapper{
+    position: absolute;
+    top: 150px;
+    /* left:240px; */
+    /* width: calc(100%-240px); */
+    /* height: calc(100%-80px); */
+    width: 100%;
+    font-size: 12px;
+    background-color:  rgb(223, 220, 232);
+}

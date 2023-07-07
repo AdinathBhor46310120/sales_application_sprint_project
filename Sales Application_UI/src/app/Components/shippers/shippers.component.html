@@ -1,1 +1,30 @@
-<p>shippers works!</p>
+
+<div class="wrapper">
+    <div class="holder">
+        <table class="table">
+            <thead>
+                <tr >
+                    <th scope="col">Shiper iD</th>
+                    <th scope="col">Cpmpany Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <!-- <th scope="col">>Password</th> -->
+                    <th scope="col">Role</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let shipper of shippers">
+                    <th scope="row">{{shipper.shipperId}}</th>
+                    <td scoped="row">{{shipper.companyName}}</td>
+                    <td scoped="row">{{shipper.phone}}</td>
+                    <td scoped="row">{{shipper.email}}</td>
+                    <!-- <td scoped="row">{{shipper.password}}</td> -->
+                    <td scoped="row">{{shipper.role}}</td>
+                    
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
