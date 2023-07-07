@@ -11,6 +11,7 @@ import { EmployeesComponent } from './Components/employees/employees.component';
 import { TerritoriesComponent } from './Components/territories/territories.component';
 import { ShippersComponent } from './Components/shippers/shippers.component';
 import { ShipdetailsComponent } from './Components/shipdetails/shipdetails.component';
+import { OrdersComponent } from './Components/orders/orders.component';
 
 const routes: Routes = [
   {path:"",component:LoginComponent,canActivate:[LogGuard]},
@@ -23,7 +24,8 @@ const routes: Routes = [
     {path:"employees",component:EmployeesComponent},
     {path:"territories",component:TerritoriesComponent},
     {path:"shippers",component:ShippersComponent},
-    {path:"shipdetail",component:ShipdetailsComponent}
+    {path:"shipdetail",component:ShipdetailsComponent},
+    {path:"orders",component:OrdersComponent}
   ],canActivate:[AuthGuard]}
 ];
 
