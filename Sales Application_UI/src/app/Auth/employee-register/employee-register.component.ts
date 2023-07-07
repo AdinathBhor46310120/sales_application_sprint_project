@@ -75,6 +75,7 @@ export class EmployeeRegisterComponent implements OnInit{
           this.router.navigate(["login"])
         },
         error: (err) => {
+          console.log(err);
           this.toast.error({detail:'Error',summary:err.error.message, duration:5000});
         }
       });
