@@ -1,1 +1,29 @@
-<p>shipdetails works!</p>
+<div class="wrapper">
+    <div class="holder">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ship Name</th>
+                    <th scope="col">Ship Address</th>
+                    <th scope="col">Ship City</th>
+                    <th scope="col">Ship Region</th>
+                    <th scope="col">>Ship Postal Code</th>
+                    <th scope="col">Ship Country</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let shipdetail of shipdetails">
+                    <th scope="row">{{shipdetail.shipName}}</th>
+                    <td scoped="row">{{shipdetail.shipAddress}}</td>
+                    <td scoped="row">{{shipdetail.shipCity}}</td>
+                    <td scoped="row">{{shipdetail.shipRegion}}</td>
+                    <td scoped="row">{{shipdetail.shipPostalCode}}</td>
+                    <td scoped="row">{{shipdetail.shipCountry}}</td>
+                    
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

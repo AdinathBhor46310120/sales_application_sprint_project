@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Employee } from '../Models/employee';
+import { ShipDetails } from '../Models/shipDetails';
+import { Shippers } from '../Models/shipper';
 import { Territorie } from '../Models/territorie';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
+  
 
   baseUrl:string = "https://localhost:7127/api";
 
@@ -41,6 +44,16 @@ export class AdminService {
   getAllTerriteroriesByRegion(region:string){
     console.log(region);
     return this.http.get<Territorie[]>(`${this.baseUrl}/Territories/region/${region}`);
+  }
+
+  getAllShippers(){
+    return this.http.get<Shippers[]>(`${this.baseUrl}/shippers`);
+
+  }
+
+  getAllShipDetails(){
+    return this.http.get<ShipDetails[]>(`${this.baseUrl}/orders`);
+
   }
 }
 
