@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Employee } from '../Models/employee';
+import { ShipDetails } from '../Models/shipDetails';
 import { Shippers } from '../Models/shipper';
 import { Territorie } from '../Models/territorie';
 
@@ -47,6 +48,11 @@ export class AdminService {
 
   getAllShippers(){
     return this.http.get<Shippers[]>(`${this.baseUrl}/shippers`);
+
+  }
+
+  getAllShipDetails(){
+    return this.http.get<ShipDetails[]>(`${this.baseUrl}/orders`);
 
   }
 }

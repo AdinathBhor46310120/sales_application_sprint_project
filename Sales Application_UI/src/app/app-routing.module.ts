@@ -10,6 +10,7 @@ import { LogGuard } from './Services/log.guard';
 import { EmployeesComponent } from './Components/employees/employees.component';
 import { TerritoriesComponent } from './Components/territories/territories.component';
 import { ShippersComponent } from './Components/shippers/shippers.component';
+import { ShipdetailsComponent } from './Components/shipdetails/shipdetails.component';
 
 const routes: Routes = [
   {path:"",component:LoginComponent,canActivate:[LogGuard]},
@@ -21,7 +22,8 @@ const routes: Routes = [
   [
     {path:"employees",component:EmployeesComponent},
     {path:"territories",component:TerritoriesComponent},
-    {path:"shippers",component:ShippersComponent}
+    {path:"shippers",component:ShippersComponent},
+    {path:"shipdetail",component:ShipdetailsComponent}
   ],canActivate:[AuthGuard]}
 ];
 
