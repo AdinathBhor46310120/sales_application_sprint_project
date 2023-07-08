@@ -17,6 +17,9 @@ import { ShippersComponent } from './Components/shippers/shippers.component';
 import { TerritoriesComponent } from './Components/territories/territories.component';
 import { ShipdetailsComponent } from './Components/shipdetails/shipdetails.component';
 import { SalesComponent } from './Components/sales/sales.component';
+import { EmployeeUpdatesComponent } from './Components/employee-updates/employee-updates.component';
+import { ShipperUpdatesComponent } from './Components/shipper-updates/shipper-updates.component';
+import { TerritoriesUpdatesComponent } from './Components/territories-updates/territories-updates.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { SalesComponent } from './Components/sales/sales.component';
     ShippersComponent,
     TerritoriesComponent,
     ShipdetailsComponent,
-    SalesComponent
+    SalesComponent,
+    EmployeeUpdatesComponent,
+    ShipperUpdatesComponent,
+    TerritoriesUpdatesComponent
   ],
   imports: [
     BrowserModule,
