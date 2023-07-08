@@ -1,49 +1,4 @@
-<!-- <form>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputEmail4">Email</label>
-        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">Password</label>
-        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="form-group">
-      <label for="inputAddress2">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form> -->
+
 <div class="wrapper">
     <div class="col-8">
         <form>
@@ -51,8 +6,10 @@
                 <div class="row mb-2">
                     <div class="col">
                         <div class="text-center">
-                            <span class="title" style="font-weight: bold ;">Update Employee Details</span>
+                            <span class="title" style="font-weight: bold; font-size: 30px;">Update Employee Details</span>
+            
                         </div>
+                        <br>
                     </div>
                 </div>
                 <div class="row">
@@ -60,93 +17,86 @@
                         <div class="mb-2">
                             <label for="titleofcourtesy">Title of Courtesy</label>
                             <input type="text" name="titleofcourtesy" formControlName="titleofcourtesy"
-                                id="titleofcourtesy">
+                                id="titleofcourtesy" placeholder="Enter your Title">
                         </div>
                         <div class="mb-2">
                             <label for="title">Title</label>
-                            <input type="text" name="title" formControlName="title" id="title">
+                            <input type="text" name="title" formControlName="title" id="title" placeholder="Enter your Title">
                         </div>
                         <div class="mb-2">
                             <label for="email">Email</label>
-                            <input type="text" name="email" formControlName="email" id="Email">
+                            <input type="text" name="email" formControlName="email" id="Email" placeholder="Enter Email">
                         </div>
                         <div class="mb-2">
                             <label for="role">Role</label>
-                            <input type="text" name="role" formControlName="role" id="Role">
+                            <input type="text" name="role" formControlName="role" id="Role"  placeholder=" Enter Your Role">
                         </div>
                         <div class="mb-2">
                             <label for="address">Address</label>
-                            <input type="text" name="address" formControlName="address" id="Address">
+                            <input type="text" name="address" formControlName="address" id="address"  placeholder="Enter Address">
                         </div>
                         <div class="mb-2">
-                            <label for="region">State</label>
-                            <input type="text" name="region" formControlName="region" id="region">
+                            <label for="extension">Extension</label>
+                            <input type="text" name="extension" formControlName="extension" id="extension"  placeholder="Enter Country Phone Externtion">
                         </div>
+                        
 
                     </div>
                     <div class="col-4">
                         <div class="mb-2">
                             <label for="firstName">First Name</label>
-                            <input type="text" name="firstName" formControlName="firstName" id="First Name">
+                            <input type="text" name="firstName" formControlName="firstName" id="firstName"  placeholder="Enter First Name">
                         </div>
                         <div class="mb-2">
                             <label for="password">Password</label>
-                            <input type="password" name="password" formControlName="password" id="password">
+                            <input type="password" name="password" formControlName="password" id="password"  placeholder=" Enter Password">
                         </div>
                         <div class="mb-2">
                             <label for="city">City</label>
-                            <input type="text" name="city" formControlName="city" id="City">
+                            <input type="text" name="city" formControlName="city" id="city"   placeholder=" Enter City">
                         </div>
                         <div class="mb-2">
                             <label for="country">Country</label>
-                            <input type="text" name="country" formControlName="country" id="Country">
+                            <input type="text" name="country" formControlName="country" id="country"  placeholder="Enter Country">
                             <div class="mb-2">
                                 <label for="reportsTo">Reports To</label>
-                                <input type="text" name="reportsTo" formControlName="reportsTo" id="Reports To">
+                                <input type="text" name="reportsTo" formControlName="reportsTo" id="ReportsTo"  placeholder="Whome to Reports">
+                            </div>
+                            <div class="mb-2">
+                                <label for="hireDate">Hire Date</label>
+                                <input type="text" name="hireDate" formControlName="hireDate" id="Hire Date"  placeholder="Enter your HireDate">
                             </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="mb-2">
                             <label for="lastName">Last Name</label>
-                            <input type="text" name="Last Name" formControlName="lastName" id="Last Name">
+                            <input type="text" name="Last Name" formControlName="lastName" id="Last Name"  placeholder=" Entr Last Name">
                         </div>
                         <div class="mb-2">
                             <label for="birthDate">Birth Date</label>
-                            <input type="text" name="birthDate" formControlName="birthDate" id="Birth Date">
+                            <input type="text" name="birthDate" formControlName="birthDate" id="Birth Date"  placeholder="Birth Date">
                         </div>
                         <div class="mb-2">
                             <label for="postalCode">Postal Code</label>
-                            <input type="text" name="postalCode" formControlName="postalCode" id="Postal Code">
+                            <input type="text" name="postalCode" formControlName="postalCode" id="Postal Code"  placeholder="Postal Code">
                         </div>
                         <div class="mb-2">
                             <label for="homePhone">Phone Number</label>
-                            <input type="text" name="Phone Number" formControlName="homePhone" id="Phone Number">
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="mb-2">
-                            <label for="extension">Extension</label>
-                            <input type="text" name="extension" formControlName="extension" id="extension">
+                            <input type="text" name="homePhone" formControlName="homePhone" id="Phone Number"  placeholder="Phone Number">
                         </div>
                         <div class="mb-2">
-                            <label for="hireDate">Hire Date</label>
-                            <input type="text" name="hireDate" formControlName="hireDate" id="Hire Date">
+                            <label for="region">State</label>
+                            <input type="text" name="region" formControlName="region" id="region"  placeholder="Enter State">
                         </div>
                         <div class="mb-2">
                             <label for="photoPath">Photo Path</label>
-                            <input type="text" name="photoPath" formControlName="photoPath" id="PhotoPath">
+                            <input type="text" name="photoPath" formControlName="photoPath" id="PhotoPath"  placeholder="Photo Path">
                         </div>
                     </div>
+                    
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label for="photo" class="text">Photo</label>
-                            <!-- <input #fileInput type="file"  (change)="onFileChange($event)"> -->
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-2">

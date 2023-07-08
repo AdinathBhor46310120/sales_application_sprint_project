@@ -13,6 +13,8 @@ import { ShippersComponent } from './Components/shippers/shippers.component';
 import { ShipdetailsComponent } from './Components/shipdetails/shipdetails.component';
 import { OrdersComponent } from './Components/orders/orders.component';
 import { EmployeeUpdatesComponent } from './Components/employee-updates/employee-updates.component';
+import { ShipperUpdatesComponent } from './Components/shipper-updates/shipper-updates.component';
+import { TerritoriesUpdatesComponent } from './Components/territories-updates/territories-updates.component';
 
 const routes: Routes = [
   {path:"",component:LoginComponent,canActivate:[LogGuard]},
@@ -27,7 +29,9 @@ const routes: Routes = [
     {path:"shippers",component:ShippersComponent},
     {path:"shipdetail",component:ShipdetailsComponent},
     {path:"orders",component:OrdersComponent},
-    {path:"employee-updates",component:EmployeeUpdatesComponent}
+    {path:"employee-updates",component:EmployeeUpdatesComponent},
+    {path:"shipper-updates",component:ShipperUpdatesComponent},
+    {path:"territory-updates",component:TerritoriesUpdatesComponent}
   ],canActivate:[AuthGuard]}
 ];
 
