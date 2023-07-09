@@ -1,0 +1,44 @@
+<div class="filters">
+    <form [formGroup]="searchForm">
+        <div class="row">
+            <div class="col-3">
+                <select class="form-select" aria-label="Default select example" formControlName="option" (change)="OnSelectChange($event)">
+                    <!-- <option selected>Open this select menu</option> -->
+                    <option value="date">Date</option>
+                    <option value="year">Year</option>
+                    <option value="month">Month</option>
+                    <option value="btwDates">Between Dates</option>
+                  </select>
+            </div>
+            <div class="col-6 d-flex">
+                <input type="date" name="date" class="form-control" formControlName="date" id="date" *ngIf="isThereDate">
+                <input type="date" name="todate" class="form-control" formControlName="todate" id="todate" *ngIf="isThereToDate">
+                <input class="form-control mr-sm-2" type="search" formControlName="search" placeholder="Search"
+                    aria-label="Search" *ngIf="!isThereDate && !isThereToDate">
+                <button class="btn btn-outline-success my-2 my-sm-0" (click)="Search()">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="wrapper">
+    <div class="holder">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Sale Ammount</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Ship Date</th>
+               </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let sale of sales">
+                    <th scope="row">{{sale.saleAmount}}</th>
+                    <td scoped="row">{{sale.orderId}}</td>
+                    <td scoped="row">{{sale.companyName}}</td>
+                    <td scoped="row">{{sale.shippedDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

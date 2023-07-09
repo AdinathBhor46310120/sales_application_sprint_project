@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <div class="holder">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Customer ID</th>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Required Date</th>
+                    <th scope="col">Ship Date</th>
+                    <th scope="col">Ship Via</th>
+                    <th scope="col">Ship Name</th>
+                    <th scope="col">Ship Address</th>
+                    <th scope="col">Ship City</th>
+               </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <th scope="row">{{order.orderId}}</th>
+                    <td scoped="row">{{order.customerId}}</td>
+                    <td scoped="row">{{order.orderDate}}</td>
+                    <td scoped="row">{{order.requiredDate}}</td>
+                    <td scoped="row">{{order.shippedDate}}</td>
+                    <td scoped="row">{{order.shipVia}}</td>
+                    <td scoped="row">{{order.shipName}}</td>
+                    <td scoped="row">{{order.shipAddress}}</td>
+                    <td scoped="row">{{order.shipCity}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
