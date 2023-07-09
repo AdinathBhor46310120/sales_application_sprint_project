@@ -8,7 +8,7 @@ import { Sale } from '../Models/sale';
 })
 export class EmployeeService {
   // baseUrl:string = "https://localhost:7127/api";
-  baseUrl:string = "https://salseappapi116.azurewebsites.net/api";
+  baseUrl:string = "https://saleswebapiapplication.azurewebsites.net/api";
   constructor(private http:HttpClient) { }
 
   getAllOrdersHandledByEmployee(employeeID:string){
