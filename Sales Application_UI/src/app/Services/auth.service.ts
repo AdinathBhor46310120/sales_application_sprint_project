@@ -8,6 +8,9 @@ import { LoginResponse } from '../Models/login-response';
 import { ShipperRegisterRequest } from '../Models/shipper-register-request';
 import { RegisterResponse } from '../Models/register-response';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtService } from './jwt.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgToastService } from 'ng-angular-popup';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,7 @@ export class AuthService {
   private baseUrl:string = "https://localhost:7127/api/auth";
   private userPayload:any;
 
-  constructor(private http:HttpClient,private router:Router) { 
+  constructor(private http:HttpClient,private router:Router,private jwtSrvice:JwtService,private toast:NgToastService) { 
     this.userPayload = this.decodedToken();
   }
 
@@ -48,6 +51,11 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem("token");
+    this.jwtSrvice.removeEmail();
+    this.jwtSrvice.removeRole();
+    this.jwtSrvice.removeUser();
+    this.jwtSrvice.removeUserId();
+    this.toast.success({detail:"Success",summary:"Log out successfully!",duration:5000});
     this.router.navigate(["login"]);
   }
 
@@ -78,8 +86,30 @@ export class AuthService {
 
   getUserFromToken(){
     if(this.userPayload){
+      console.log(this.userPayload)
       return this.userPayload.JSON
     }
+  }
+
+  getUserIdFromToken(){
+    this.userPayload = this.decodedToken();
+      console.log(JSON.parse(this.userPayload.JSON));
+      let user = JSON.parse(this.userPayload.JSON);
+      if(this.userPayload.role="admin")
+      {
+        console.log(user);
+        return user.AdminId;
+      }
+      else if(this.userPayload.role="shipper"){
+        console.log(user);
+        console.log("shippperr")
+        return user.ShipperId;
+      }
+      else if(this.userPayload.role = "employee"){
+        console.log(user);
+        return user.EmployeeId;
+      }
+    
   }
 }
 

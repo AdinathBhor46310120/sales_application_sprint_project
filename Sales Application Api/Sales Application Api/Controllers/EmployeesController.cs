@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sales_Application_Api.Models;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace Sales_Application_Api.Controllers
 {
@@ -47,7 +48,7 @@ namespace Sales_Application_Api.Controllers
         }
 
         // PUT: api/employee/edit/5
-        [HttpPut("edit{id}")]
+        [HttpPut("edit/{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
             if (id != employee.EmployeeId)
@@ -156,112 +157,246 @@ namespace Sales_Application_Api.Controllers
             return employees;
         }
 
-        ////GET: api/Employees/highestsalebyemployee/{date}
-        //[HttpGet("highestsalebyemployee/{date}")]
-        //public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee()
-        //{
-
-        //    var salesTotalByAmount = _context.SalesTotalsByAmounts.OrderByDescending(sta => sta.SaleAmount);
-
-        //    var 
-    
-        //}
-
-        /*
-       //GET: api/Employees/highestsalebyemployee/{year}
-       [HttpGet("highestsalebyemployee/{date}")]
-       public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
-       {
-
-           var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
-
-           if (employees == null)
-           {
-               return NotFound();
-           }
-
-           return employees;
-       }*/
-
-        /*
-      //GET: /api/employee/lowestsalebyemployee/{date}
-      [HttpGet("highestsalebyemployee/{date}")]
-      public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
-      {
-
-          var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
-
-          if (employees == null)
-          {
-              return NotFound();
-          }
-
-          return employees;
-      }*/
-
-        /*
-     //GET: /api/employee/lowestsalebyemployee/{year}
-     [HttpGet("highestsalebyemployee/{date}")]
-     public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
-     {
-
-         var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
-
-         if (employees == null)
-         {
-             return NotFound();
-         }
-
-         return employees;
-     }*/
-
-        /*
-     //GET: /api/employee/salemadebyanemployee/{Employeeid}/{date}
-     [HttpGet("highestsalebyemployee/{date}")]
-     public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
-     {
-
-         var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
-
-         if (employees == null)
-         {
-             return NotFound();
-         }
-
-         return employees;
-     }*/
-
-        /*
-    //GET: /api/employee/Salemadebyanemployeebetweendates/{EmployeeId}{fromdate}/{todate}
-    [HttpGet("highestsalebyemployee/{date}")]
-    public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
-    {
-
-        var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
-
-        if (employees == null)
+        //GET: api/Employees/highestsalebyemployee/{EmployeeID}
+        [HttpGet("highestsalebyemployee/{EmployeeID}")]
+        public async Task<ActionResult<IEnumerable<SalesTotalsByAmount>>> GetHeightSaleByEmployee(int EmployeeID)
         {
-            return NotFound();
+
+            var salesTotalByAmount = await _context.SalesTotalsByAmounts.ToListAsync();
+            if(salesTotalByAmount == null)
+            {
+                return BadRequest();
+            }
+
+            var employeeSales = new List<SalesTotalsByAmount>();
+
+            foreach(var sta in salesTotalByAmount)
+            {
+                var order = await _context.Orders.Where(o => o.OrderId == sta.OrderId).FirstOrDefaultAsync();
+
+                if(order.EmployeeId == EmployeeID)
+                {
+                    employeeSales.Add(sta);
+                }
+            }
+
+            return Ok(employeeSales.OrderByDescending(s => s.SaleAmount));
+
+            //List<OrderDetail> ordersDetails = new List<OrderDetail>();
+
+            //foreach (var order in orders)
+            //{
+            //    var orderDetail = await _context.OrderDetails.Where(od => od.OrderId == order.OrderId).FirstOrDefaultAsync();
+            //    if (orderDetail != null)
+            //    {
+
+            //        ordersDetails.Add(orderDetail);
+            //    }
+            //}
         }
 
-        return employees;
-    }*/
+        //GET: api/Employees/highestsalebyemployee/{Date}
+        [HttpGet("salebyemploye/date/{EmployeeID}/{Date}")]
+        public async Task<ActionResult<IEnumerable<SalesTotalsByAmount>>> GetHeightSaleByEmployeeOnDate(int EmployeeID,string Date)
+        {
 
-        /*
+            var dt = DateTime.Parse(Date);
+
+            var salesTotalByAmount = await _context.SalesTotalsByAmounts.ToListAsync();
+            if (salesTotalByAmount == null)
+            {
+                return BadRequest();
+            }
+
+            var employeeSales = new List<SalesTotalsByAmount>();
+
+            foreach (var sta in salesTotalByAmount)
+            {
+                var order = await _context.Orders.Where(o => o.OrderId == sta.OrderId).FirstOrDefaultAsync();
+
+                if (order.EmployeeId == EmployeeID && order.OrderDate == dt)
+                {
+                    employeeSales.Add(sta);
+                }
+            }
+
+            return Ok(employeeSales.OrderByDescending(s => s.SaleAmount));
+
+            //List<OrderDetail> ordersDetails = new List<OrderDetail>();
+
+            //foreach (var order in orders)
+            //{
+            //    var orderDetail = await _context.OrderDetails.Where(od => od.OrderId == order.OrderId).FirstOrDefaultAsync();
+            //    if (orderDetail != null)
+            //    {
+
+            //        ordersDetails.Add(orderDetail);
+            //    }
+            //}
+        }
+
+        //GET: api/Employees/highestsalebyemployee/{Date}
+        [HttpGet("salebyemploye/year/{EmployeeID}/{Year}")]
+        public async Task<ActionResult<IEnumerable<SalesTotalsByAmount>>> GetHeightSaleByEmployeeOnYear(int EmployeeID, string Year)
+        {
+
+            
+
+            var salesTotalByAmount = await _context.SalesTotalsByAmounts.ToListAsync();
+            if (salesTotalByAmount == null)
+            {
+                return BadRequest();
+            }
+
+            var employeeSales = new List<SalesTotalsByAmount>();
+
+            foreach (var sta in salesTotalByAmount)
+            {
+                var order = await _context.Orders.Where(o => o.OrderId == sta.OrderId).FirstOrDefaultAsync();
+
+                if (order.EmployeeId == EmployeeID && order.OrderDate.Year == int.Parse(Year))
+                {
+                    employeeSales.Add(sta);
+                }
+            }
+
+            return Ok(employeeSales.OrderByDescending(s => s.SaleAmount));
+
+            //List<OrderDetail> ordersDetails = new List<OrderDetail>();
+
+            //foreach (var order in orders)
+            //{
+            //    var orderDetail = await _context.OrderDetails.Where(od => od.OrderId == order.OrderId).FirstOrDefaultAsync();
+            //    if (orderDetail != null)
+            //    {
+
+            //        ordersDetails.Add(orderDetail);
+            //    }
+            //}
+        }
+
+        //GET: api/Employees/highestsalebyemployee/{Date}
+        [HttpGet("salebyemploye/month/{EmployeeID}/{Month}")]
+        public async Task<ActionResult<IEnumerable<SalesTotalsByAmount>>> GetHeightSaleByEmployeeInMonth(int EmployeeID, string Month)
+        {
+
+
+
+            var salesTotalByAmount = await _context.SalesTotalsByAmounts.ToListAsync();
+            if (salesTotalByAmount == null)
+            {
+                return BadRequest();
+            }
+
+            var employeeSales = new List<SalesTotalsByAmount>();
+
+            foreach (var sta in salesTotalByAmount)
+            {
+                var order = await _context.Orders.Where(o => o.OrderId == sta.OrderId).FirstOrDefaultAsync();
+
+                if (order.EmployeeId == EmployeeID && order.OrderDate.Month == int.Parse(Month))
+                {
+                    employeeSales.Add(sta);
+                }
+            }
+
+            return Ok(employeeSales.OrderByDescending(s => s.SaleAmount));
+
+            //List<OrderDetail> ordersDetails = new List<OrderDetail>();
+
+            //foreach (var order in orders)
+            //{
+            //    var orderDetail = await _context.OrderDetails.Where(od => od.OrderId == order.OrderId).FirstOrDefaultAsync();
+            //    if (orderDetail != null)
+            //    {
+
+            //        ordersDetails.Add(orderDetail);
+            //    }
+            //}
+        }
+
+        //GET: api/Employees/highestsalebyemployee/{Date}
+        [HttpGet("salebyemploye/betweendate/{EmployeeID}/{FromDate}/{ToDate}")]
+        public async Task<ActionResult<IEnumerable<SalesTotalsByAmount>>> GetHeightSaleByEmployeeFromToDate(int EmployeeID, string FromDate,string ToDate)
+        {
+
+
+
+            var salesTotalByAmount = await _context.SalesTotalsByAmounts.ToListAsync();
+            if (salesTotalByAmount == null)
+            {
+                return BadRequest();
+            }
+
+            var employeeSales = new List<SalesTotalsByAmount>();
+
+            foreach (var sta in salesTotalByAmount)
+            {
+                var order = await _context.Orders.Where(o => o.OrderId == sta.OrderId).FirstOrDefaultAsync();
+
+                if (order.EmployeeId == EmployeeID && order.OrderDate >= DateTime.Parse(FromDate) && order.OrderDate <= DateTime.Parse(ToDate))
+                {
+                    employeeSales.Add(sta);
+                }
+            }
+
+            return Ok(employeeSales.OrderByDescending(s => s.SaleAmount));
+
+            //List<OrderDetail> ordersDetails = new List<OrderDetail>();
+
+            //foreach (var order in orders)
+            //{
+            //    var orderDetail = await _context.OrderDetails.Where(od => od.OrderId == order.OrderId).FirstOrDefaultAsync();
+            //    if (orderDetail != null)
+            //    {
+
+            //        ordersDetails.Add(orderDetail);
+            //    }
+            //}
+        }
+
+
+
+
+
+        //GET: /api/employee/orders/{EmployeeID}
+        [HttpGet("orders/{EmployeeID}")]
+    public async Task<ActionResult<IEnumerable<Order>>> GetAllOrdersPlacedByEmployee(int EmployeeID)
+    {
+
+            var orders = await _context.Orders.Where(o => o.EmployeeId == EmployeeID).ToListAsync();
+
+            if(orders == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(orders);
+    }
+
+
     //GET: /api/employee/companyname/{EmployeeID}
-    [HttpGet("highestsalebyemployee/{date}")]
-    public async Task<ActionResult<IEnumerable<Employee>>> GetHeightSaleByEmployee(DateTime HireDate)
+    [HttpGet("companyname/{EmployeeID}")]
+    public async Task<ActionResult<IEnumerable<Employee>>> GetCompanyName(int EmployeeID)
     {
 
-        var employees = await _context.Employees.Where(c => c.HireDate == HireDate).ToListAsync();
+            List<string> companyNames = new List<string>();
 
-        if (employees == null)
-        {
-            return NotFound();
-        }
+            var suppilers = await this._context.Suppliers.ToListAsync();
 
-        return employees;
-    }*/
+            if(suppilers == null)
+            {
+                return BadRequest();
+            }
+
+            foreach(var supplier in suppilers)
+            {
+                companyNames.Add(supplier.CompanyName);
+            }
+
+            return Ok(companyNames);
+
+    }
 
 
         private bool EmployeeExists(int id)

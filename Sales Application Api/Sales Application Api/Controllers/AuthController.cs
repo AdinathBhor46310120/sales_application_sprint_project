@@ -199,9 +199,9 @@ namespace Sales_Application_Api.Controllers
         {
             bool res1 = await _context.Employees.AnyAsync(u => u.Email == email);
 
-            bool res2 = await _context.Admins.AllAsync(u => u.Email == email);
+            bool res2 = await _context.Admins.AnyAsync(u => u.Email == email);
 
-            bool res3 = await _context.Shippers.AllAsync(u => u.Email == email);
+            bool res3 = await _context.Shippers.AnyAsync(u => u.Email == email);
 
             return res1 || res2 || res3;
         }
@@ -263,11 +263,26 @@ namespace Sales_Application_Api.Controllers
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("this is my secret key new");
 
+            var u = new
+            {
+                EmployeeId = user.EmployeeId,
+                Role = user.Role,
+                Email = user.Email,
+                Password = user.Password,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                HomePhone = user.HomePhone,
+                Country = user.Country,
+                Title = user.Title,
+                Region = user.Region,
+                ReportsTo = user.ReportsTo
+            };
+
             var idenity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Role,user.Role),
                 new Claim(ClaimTypes.Email,user.Email),
-                new Claim(JsonClaimValueTypes.Json,JsonConvert.SerializeObject(user))
+                new Claim(JsonClaimValueTypes.Json,JsonConvert.SerializeObject(u))
             });
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
@@ -288,13 +303,6 @@ namespace Sales_Application_Api.Controllers
         {
             Random rd = new Random();
             return rd.Next(1000, 9999);
-        }
-
-        private byte[] GetFileBytes(IFormFile formFile)
-        {
-            using var memoryStream = new MemoryStream();
-            formFile.CopyToAsync(memoryStream);
-            return memoryStream.ToArray();
         }
     }
 }
