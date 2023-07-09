@@ -1,15 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: black;">
     <div class="container-fluid">
         <!-- style="background-color: black;" -->
-<<<<<<< HEAD
-        <div class="logo">
-            <img src="../../../assets/img/sales application.png" alt="image">
-        </div>
-        <a class="navbar-brand" style="background-color: black;"></a>
-=======
         <a class="navbar-brand" href="#" style="background-color: black; color: white;" >Sales Application</a>
         <h3 style="color:#fff;">{{user.Email}}</h3>
->>>>>>> 0ac7a1a90c602e20bbf8f42ceff71ac789b94281
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,14 +13,14 @@
 <!-- The sidebar -->
 <div class="sidebar">
     <div class="admin" *ngIf="role=='admin'">
-        <a routerLink="/home/employee-updates">Update Employee</a>
+        <!-- <a routerLink="/home/employee-updates">Update Employee</a> -->
     <a routerLink="/home/employees">Employee Details</a>
     <a routerLink="/home/territories">Territories</a>   
     <a routerLink="/home/shippers">Shipper Details</a>
     <a routerLink="/home/orders">Orders</a>
     <a routerLink="/home/shipdetail">Ship Details</a>
-    <a routerLink="/home/shipper-updates"> Update Shipper Details</a>
-    <a routerLink="/home/territory-updates"> Update Territory Details</a>
+    <!-- <a routerLink="/home/shipper-updates"> Update Shipper Details</a> -->
+    <!-- <a routerLink="/home/territory-updates"> Update Territory Details</a> -->
     </div>
     <div class="employee" *ngIf="role=='employee'">
         <a routerLink="/home/employee-orders">All Order Handle By Employee</a>
