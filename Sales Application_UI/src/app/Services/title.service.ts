@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class TitleService {
 
-  baseUrl:string = "https://localhost:7022/api/titles";
+  // baseUrl:string = "https://localhost:7022/api/titles";
+  baseUrl:string = "https://salseappapi116.azurewebsites.net/api";
   constructor(private http:HttpClient) { }
 
   getAllTitles()

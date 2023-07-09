@@ -17,7 +17,8 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class AuthService {
 
-  private baseUrl:string = "https://localhost:7127/api/auth";
+  // private baseUrl:string = "https://localhost:7127/api/auth";
+  baseUrl:string = "https://salseappapi116.azurewebsites.net/api/auth";
   private userPayload:any;
 
   constructor(private http:HttpClient,private router:Router,private jwtSrvice:JwtService,private toast:NgToastService) { 
