@@ -8,7 +8,7 @@ export class TitleService {
 
   // baseUrl:string = "https://localhost:7022/api/titles";
   // baseUrl:string = "https://salseappapi116.azurewebsites.net/api";
-  baseUrl:string = "https://saleswebapiapplication.azurewebsites.net/api";
+  baseUrl:string = "https://salesbackendapi.azurewebsites.net/api";
   constructor(private http:HttpClient) { }
 
   getAllTitles()

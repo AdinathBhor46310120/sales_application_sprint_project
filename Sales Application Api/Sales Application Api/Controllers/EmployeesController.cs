@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sales_Application_Api.Models;
+using Sales_Application_Api.Paylodes;
 using static NuGet.Packaging.PackagingConstants;
 
 namespace Sales_Application_Api.Controllers
@@ -38,13 +39,42 @@ namespace Sales_Application_Api.Controllers
 
         // GET: api/employee
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<EmployeeView>>> GetEmployees()
         {
             if (_context.Employees == null)
             {
                 return NotFound();
             }
-            return await _context.Employees.ToListAsync();
+            var emps =  await _context.Employees.ToListAsync();
+
+            List<EmployeeView> employees = new List<EmployeeView>();
+
+            foreach(var employ in emps)
+            {
+                employees.Add(new EmployeeView()
+                {
+                    FirstName = employ.FirstName,
+                    LastName = employ.LastName,
+                    Email = employ.Email,
+                    Address = employ.Address,
+                    City = employ.City,
+                    Region = employ.Region,
+                    PostalCode = employ.PostalCode,
+                    Country = employ.Country,
+                    BirthDate = employ.BirthDate,
+                    HireDate = employ.HireDate,
+                    HomePhone = employ.HomePhone,
+                    Extension = employ.Extension,
+                    PhotoPath = employ.PhotoPath,
+                    Notes = employ.Notes,
+                    Title = employ.Title,
+                    TitleOfCourtesy = employ.TitleOfCourtesy,
+                    Role = employ.Role,
+                    ReportsTo = employ.ReportsTo
+                }) ;
+            }
+
+            return Ok(employees);
         }
 
         // PUT: api/employee/edit/5

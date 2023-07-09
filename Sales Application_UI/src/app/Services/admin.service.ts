@@ -13,7 +13,8 @@ export class AdminService {
   
 
   // baseUrl:string = "https://localhost:7127/api";
-  baseUrl:string = "https://saleswebapiapplication.azurewebsites.net/api";
+  // baseUrl:string = "https://saleswebapiapplication.azurewebsites.net/api";
+  baseUrl:string = "https://salesbackendapi.azurewebsites.net/api";
 
   constructor(private http:HttpClient) { }
 

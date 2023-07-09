@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/25c740a5-964e-4d77-a155-d31f16d050e2/resourceGroups/SalesApplicationResourceGroup/providers/Microsoft.Web/sites/saleswebui116",
+    "appService.deploySubpath": "Sales Application_UI\\dist\\book-portal-ui"
+}
