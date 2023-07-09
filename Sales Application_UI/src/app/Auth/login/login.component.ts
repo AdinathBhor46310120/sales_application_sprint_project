@@ -34,10 +34,13 @@ export class LoginComponent implements OnInit{
           let payload = this.authService.decodedToken();
           this.jwtService.setEmail(payload.email);
           this.jwtService.setRole(payload.role);
+          this.jwtService.setUser(payload.JSON);
+          this.jwtService.setUserId(payload.JSON);
           this.loginForm.reset();
           this.router.navigate(["home"])
         },
         error:(err) => {
+          console.log(err)
           this.toast.error({detail:'Error',summary:err.error.message, duration:5000});
         }
       })
